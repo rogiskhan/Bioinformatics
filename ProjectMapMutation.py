@@ -19,7 +19,7 @@ import glob
 import json
 
 lista={} #it's possible to create all the main keys (chr1, chr2...) before the operation and delete the control if(lista.get(a)==None)
-for filename in glob.iglob('*.vcf'): #useful to open all vcf file in the script directoru
+for filename in glob.iglob('*.vcf'): #useful to open all vcf file in the script directory
     allel.vcf_to_csv(f"{filename}", 'example.csv') #convert from vcf to csv 
     with open('example.csv', mode='r') as f:
         reader = csv.reader(f, delimiter=',')
