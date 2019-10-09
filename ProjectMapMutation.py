@@ -33,7 +33,7 @@ for filename in glob.iglob('*.vcf'): #useful to open all vcf file in the script 
                 if(lista[a].get(row[1])==None):
                     lista[a][row[1]]=1
                 else:
-                    lista[a][row[1]]+=1  #create the dictionari called "lista" 
+                    lista[a][row[1]]+=1  #create the dictionary called "lista" with counter of mutations
 json = json.dumps(lista) #convert "lista" in a json file to be saved
 f = open("chr_map.json","w")
 f.write(json)
