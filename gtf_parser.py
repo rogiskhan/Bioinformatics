@@ -117,7 +117,6 @@ new_df.end = pd.to_numeric(new_df.end, errors='coerce')
 new_df.head(5)
 
 
-
 import allel
 import csv
 import glob
@@ -148,7 +147,7 @@ for filename in glob.iglob('D:\\bio\\kidney\\*.vcf'): #useful to open all vcf fi
 #                     print(str(row[0])+ ": "+str(row[1])+': \r\n')
 #                     print(df_end)
                     if(df_end.size > 0):
-                        result[row[0]] = df_end
+                        result[row[0]] = df_end.to_json()
     
                 if(lista[a].get(row[1])==None):
                     lista[a][row[1]]=1
@@ -159,8 +158,22 @@ for filename in glob.iglob('D:\\bio\\kidney\\*.vcf'): #useful to open all vcf fi
 # f.write(json)
 # f.close()
 
-# json = json.dumps(lista) #convert "lista" in a json file to be saved
-# f = open("chr_map.json","w")
-# f.write(json)
-# f.close()
+json = json.dumps(result) #convert "lista" in a json file to be saved
+f = open("chr_map.json","w")
+f.write(json)
+f.close()
 print(result)
+
+
+
+
+
+
+
+datContent = [i.strip().split() for i in open("D:\\bio\\generifs_basic").readlines()]
+
+# write it as a new CSV file
+with open("D:\\bio\\generifs.csv", "w") as f:
+    writer = csv.writer(f)
+    writer.writerows(datContent)
+
