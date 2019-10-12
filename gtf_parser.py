@@ -117,7 +117,16 @@ new_df.end = pd.to_numeric(new_df.end, errors='coerce')
 new_df.head(5)
 
 
+
+import allel
+import csv
+import glob
+import json
+
 lista={} #it's possible to create all the main keys (chr1, chr2...) before the operation and delete the control if(lista.get(a)==None)
+result = {}
+
+
 for filename in glob.iglob('D:\\bio\\kidney\\*.vcf'): #useful to open all vcf file in the script directory
     allel.vcf_to_csv(f"{filename}", 'example.csv') #convert from vcf to csv 
     with open('example.csv', mode='r') as f:
@@ -130,11 +139,17 @@ for filename in glob.iglob('D:\\bio\\kidney\\*.vcf'): #useful to open all vcf fi
                 a=row[0]              
                 if(lista.get(a) == None):
                     lista[a]={}
+                    
+                    
+                    
                     df_ch = new_df.loc[str(row[0]).split("chr")[1] == new_df['seqname']]
                     df_start = df_ch.loc[new_df['start'] <= int(row[1])]
                     df_end = df_start.loc[df_start['end'] >= int(row[1])]
-                    print(str(row[0])+ ": "+str(row[1])+': \r\n')
-                    print(df_end)
+#                     print(str(row[0])+ ": "+str(row[1])+': \r\n')
+#                     print(df_end)
+                    if(df_end.size > 0):
+                        result[row[0]] = df_end
+    
                 if(lista[a].get(row[1])==None):
                     lista[a][row[1]]=1
                 else:
@@ -143,3 +158,9 @@ for filename in glob.iglob('D:\\bio\\kidney\\*.vcf'): #useful to open all vcf fi
 # f = open("chr_map.json","w")
 # f.write(json)
 # f.close()
+
+# json = json.dumps(lista) #convert "lista" in a json file to be saved
+# f = open("chr_map.json","w")
+# f.write(json)
+# f.close()
+print(result)
