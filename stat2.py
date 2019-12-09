@@ -132,8 +132,8 @@ def checkSupp(ch, idG, tsg):
     
     
 df = dataframe("Homo_sapiens.GRCh38.98.chr.gtf")
-new_df = df[['seqname','feature','start','end','gene_id']].loc[df['feature'] == 'exon']
-
+#new_df = df[['seqname','feature','start','end','gene_id']].loc[df['feature'] == 'exon']
+new_df = df[['seqname','feature','start','end','gene_id']].loc[((df['feature'] == 'gene')| (df['feature'] == 'exon')) & (df['gene_biotype'] == 'protein_coding')]
 import os
 
 stat1={}
