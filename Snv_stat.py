@@ -191,25 +191,25 @@ for filename in glob.iglob(os.path.join('kidney', '*.vcf')): #useful to open all
 
 
 
-jsongen = json.dumps(statg) #convert "lista" in a json file to be saved
-f = open("statgeneric_kidney.json","w")
-f.write(jsongen)
-f.close()
+# jsongen = json.dumps(statg) #convert "lista" in a json file to be saved
+# f = open("statgeneric_kidney.json","w")
+# f.write(jsongen)
+# f.close()
 
-jsonlist = json.dumps(stat1) #convert "lista" in a json file to be saved
-f = open("stat1_kidney_snv.json","w")
-f.write(jsonlist)
-f.close()
+# jsonlist = json.dumps(stat1) #convert "lista" in a json file to be saved
+# f = open("stat1_kidney_snv.json","w")
+# f.write(jsonlist)
+# f.close()
 
-jsonex = json.dumps(stat2) #convert "lista" in a json file to be saved
-f = open("stat2_kidney_snv.json","w")
-f.write(jsonex)
-f.close()
+# jsonex = json.dumps(stat2) #convert "lista" in a json file to be saved
+# f = open("stat2_kidney_snv.json","w")
+# f.write(jsonex)
+# f.close()
 
-jsonsupp = json.dumps(stat3) #convert "lista" in a json file to be saved
-f = open("stat3_kidney_snv.json","w")
-f.write(jsonsupp)
-f.close()
+# jsonsupp = json.dumps(stat3) #convert "lista" in a json file to be saved
+# f = open("stat3_kidney_snv.json","w")
+# f.write(jsonsupp)
+# f.close()
 
 # dataframes
 
