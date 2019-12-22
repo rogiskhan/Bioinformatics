@@ -211,15 +211,9 @@ for filename in glob.iglob(os.path.join('cnv','kidney','*', '*.txt')):
 
 # dataframes
 for i in CHROMOSOMES:
-   dfg = pd.DataFrame(statg[i]).fillna(0).transpose()
-   df1 = pd.DataFrame(stat1[i]).fillna(0).transpose()
    df2 = pd.DataFrame(stat2[i]).fillna(0).transpose()
    df3 = pd.DataFrame(stat3[i]).fillna(0).transpose()
-   dfg['median'] = dfg.median(axis=1)
-   df1['median'] = df1.median(axis=1)
    df2['median'] = df2.median(axis=1)
    df3['median'] = df3.median(axis=1)
-   dfg.to_json('statg_kidney_updated_'+str(i)+'.json')
-   df1.to_json('stat1_kidney_updated_'+str(i)+'.json')
-   df2.to_json('stat2_kidney_updated_'+str(i)+'.json')
-   df3.to_json('stat3_kidney_updated_'+str(i)+'.json')
+   df2.to_json('stat2_kidney_cnv_updated_'+str(i)+'.json')
+   df3.to_json('stat3_kidney_cnv_updated_'+str(i)+'.json')
