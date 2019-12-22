@@ -122,11 +122,10 @@ def checkPos(df, pos):
 
 def checkSupp(ch, idG, tsg):
     return (idG in tsg[ch])
-    
-    
+
 df = dataframe("Homo_sapiens.GRCh38.98.chr.gtf")
-#new_df = df[['seqname','feature','start','end','gene_id']].loc[df['feature'] == 'exon']
 new_df = df[['seqname','feature','start','end','gene_id']].loc[((df['feature'] == 'gene')| (df['feature'] == 'exon')) & (df['gene_biotype'] == 'protein_coding')]
+
 import os
 
 statg={}
@@ -184,19 +183,41 @@ for filename in glob.iglob(os.path.join('kidney', '*.vcf')): #useful to open all
                             stat2[a][key][patient]+=1
                             if(key in stat3[a]):
                                 stat3[a][key][patient]+=1
+                                
+#print(statg)
+#print(stat1)
+#print(stat2)
+#print(stat3)
 
+
+
+jsongen = json.dumps(statg) #convert "lista" in a json file to be saved
+f = open("statgeneric_kidney.json","w")
+f.write(jsongen)
+f.close()
+
+jsonlist = json.dumps(stat1) #convert "lista" in a json file to be saved
+f = open("stat1_kidney_snv.json","w")
+f.write(jsonlist)
+f.close()
+
+jsonex = json.dumps(stat2) #convert "lista" in a json file to be saved
+f = open("stat2_kidney_snv.json","w")
+f.write(jsonex)
+f.close()
+
+jsonsupp = json.dumps(stat3) #convert "lista" in a json file to be saved
+f = open("stat3_kidney_snv.json","w")
+f.write(jsonsupp)
+f.close()
 
 # dataframes
+
+
 for i in CHROMOSOMES:
-   dfg = pd.DataFrame(statg[i]).fillna(0).transpose()
-   df1 = pd.DataFrame(stat1[i]).fillna(0).transpose()
-   df2 = pd.DataFrame(stat2[i]).fillna(0).transpose()
-   df3 = pd.DataFrame(stat3[i]).fillna(0).transpose()
-   dfg['median'] = dfg.median(axis=1)
-   df1['median'] = df1.median(axis=1)
-   df2['median'] = df2.median(axis=1)
-   df3['median'] = df3.median(axis=1)
-   dfg.to_json('statg_kidney_updated_'+str(i)+'.json')
-   df1.to_json('stat1_kidney_updated_'+str(i)+'.json')
-   df2.to_json('stat2_kidney_updated_'+str(i)+'.json')
-   df3.to_json('stat3_kidney_updated_'+str(i)+'.json')
+    df2 = pd.DataFrame(stat2[i]).fillna(0).transpose()
+    df3 = pd.DataFrame(stat3[i]).fillna(0).transpose()
+    df2['median'] = df2.median(axis=1)
+    df3['median'] = df3.median(axis=1)
+    df2.to_json('stat2_kidney_updated_'+str(i)+'.json')
+    df3.to_json('stat3_kidney_updated_'+str(i)+'.json')
