@@ -51,8 +51,14 @@ result = pd.concat(frames)
 print("total:" + str(result.shape))
 result = result.fillna(0)
 
+result.insert(0,'Gene ID',result.axes[0].tolist())
+result.reset_index(drop=True, inplace=True)
 
-########## RENAME PATIENTS NAMES TO 1, 2, 3, ..
+result.to_csv('snv_dataset_final.csv', index=False)
+
+
+
+######### RENAME PATIENTS NAMES TO 1, 2, 3, ..
 # renamed = result.rename(columns={x:y for x,y in zip(result.columns,range(0,len(result.columns)-1))})
 
 
@@ -60,3 +66,5 @@ result = result.fillna(0)
 ##### TO ADD GENE ID AS COLUMN 
 # result.insert(0,'Gene ID',result.axes[0].tolist())
 # result.reset_index(drop=True, inplace=True)
+
+
